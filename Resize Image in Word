@@ -1,0 +1,39 @@
+
+Sub resize()
+Dim i As Long
+With ActiveDocument
+    For i = 1 To .InlineShapes.Count
+        With .InlineShapes(i)
+            .ScaleHeight = 50
+            .ScaleWidth = 50
+        End With
+    Next i
+End With
+End Sub
+
+
+
+
+
+
+Sub ResizePics()
+Dim shp As Word.Shape
+Dim ishp As Word.InlineShape
+If Word.Selection.Type <> wdSelectionInlineShape And _
+Word.Selection.Type <> wdSelectionShape Then
+Exit Sub
+End If
+If Word.Selection.Type = wdSelectionInlineShape Then
+Set ishp = Word.Selection.Range.InlineShapes(1)
+ishp.LockAspectRatio = False
+ishp.Height = InchesToPoints(2.35)
+ishp.Width = InchesToPoints(3.4)
+Else
+If Word.Selection.Type = wdSelectionShape Then
+Set shp = Word.Selection.ShapeRange(1)
+shp.LockAspectRatio = False
+shp.Height = InchesToPoints(3.8)
+shp.Width = InchesToPoints(4#)
+End If
+End If
+End Sub
